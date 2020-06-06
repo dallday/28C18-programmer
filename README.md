@@ -1,6 +1,8 @@
 # 28C18-programmer
 A simple EEPROM programmer for 28C18 chips
 
+see  EPROM_2816_mega2560_Version1/documentation/Pinout.txt for details of construction using veroboard
+
  Thanks to K Adcock for the original code
  * http://danceswithferrets.org/geekblog/?page_id=903
 
