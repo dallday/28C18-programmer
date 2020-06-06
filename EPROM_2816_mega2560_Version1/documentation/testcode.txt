@@ -1,0 +1,76 @@
+You can use this code and test each pin to ensure it is all is working
+
+  // 
+// test code 
+  SetRedLED();
+  delay(1000); 
+  SetYellowLED();
+  delay(1000); 
+  SetGreenLED();
+  delay(1000);
+  LedsOff();
+  delay(1000); 
+
+  SetYellowLED();
+
+  Serial.print("CE Low ");
+  digitalWrite(eeprom_nCE, LOW); 
+  SetGreenLED();
+  waitforserial();
+  SetYellowLED();
+  digitalWrite(eeprom_nCE, HIGH); 
+  Serial.println("");
+  Serial.print("OE Low ");
+  digitalWrite(eeprom_nOE, LOW);
+  SetGreenLED();
+  waitforserial();
+  SetYellowLED();
+  digitalWrite(eeprom_nOE, HIGH);
+  Serial.println("");
+  Serial.print("WE Low ");
+  digitalWrite(eeprom_nWE, LOW); // not writing
+  SetGreenLED();
+  waitforserial();
+  SetYellowLED();
+  digitalWrite(eeprom_nWE, HIGH); // not writing
+  SetYellowLED();
+
+  int addressValue=0;
+  int power=0;
+  for ( power=0 ; power<11;  power ++ ){
+    // add .5 to get rounding up
+    addressValue = 0.5 + pow(2 , power);
+    Serial.print("address ");
+    Serial.print(addressValue);
+    Serial.print(" ");
+    SetAddress(addressValue);
+    SetGreenLED();
+    waitforserial();
+    SetYellowLED();
+    Serial.println("");
+  }
+  SetAddress(0);
+  
+  int dataValue=0;
+  for ( power=0 ; power<8;  power ++ ){
+    // add .5 to get rounding up
+    dataValue = 0.5 + pow(2 , power);
+    Serial.print("data ");
+    Serial.print(dataValue);
+    Serial.print(" ");
+    SetDataLinesAsOutputs();
+    SetData(dataValue);
+    SetGreenLED();
+    waitforserial();
+    SetDataLinesAsInputs();  
+    SetYellowLED();
+    Serial.println("");
+  }
+  
+  Serial.println(" end ");
+
+  LedsOff();
+  
+  
+  exit(1);
+  

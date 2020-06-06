@@ -1,0 +1,64 @@
+
+Simple layout of the EEPROM Programmer on veroboard
+
+			5v		5v			
+	LED1	22	x	23		LED2	
+	LED3	24	x	25			
+			26	x	27			
+			28	x	29			
+A7	1		30	x	31	x	24	Vcc ^^ connect to 5v
+A6	2		32	x	33		23	A8
+A5	3		34	x	35		22	A9
+A4	4		36	x	37		21	^WE
+A3	5		38	x	39		20	^OE
+A2	6		40	x	41		19	A10
+A1	7		42	x	43		18	^CE
+A0	8		44	x	45		17	D7
+D0	9		46	x	47		16	D6
+D1	10		48	x	49		15	D5
+D2	11		50	x	51		14	D4
+GND	12	x	52	x	53		13	D3
+^^connect	Gnd		Gnd			
+
+28c16 pins			Arduino Pins				28c16 pins	
+
+		x marks a cut in the veroboard track.						
+
+Tie pin 12 to the Ground
+Tie Pin 24 to 5v line
+
+The LEDs are wired in a Charlieplexing layout, using 3 330omh resistors 
+The red and yellow LEDs are connected (via Resisitors) to LED1 and LED2 in opposite polarity. 
+The Green LED is connected (via Resisitors) to LED2 and LED3 
+So
+	if LED1 is high and LED2 is low the yellow LED turns on
+	if LED1 is Low and LED2 is high the Red LED turns on
+	if LED2 is high as LED3 is low the Green LED turns on.
+In all situation the unused pins are set to input and so high impedence.
+
+
+Most of the chip pins match directly to the corresponding pins on the end of the Arduino Mega, with the exception of the Vcc ( pin 24 ) and the Ground ( pin 12 )
+
+To build this using a strip board leave at least 3 strips above the 5v line.
+cut the copper strip between the 16 rows of Arduino pins, you don't need to cut the Vcc and GND pairs ( althoughI did :)
+Cut the strips between the chip socket and the Arduino pins 52 (Vcc) and 31 (GND).
+Solder in the dual row of pins for the Arduino. I used extra longs pins to make soldering easier and raise it above the arduino
+
+Insert the chip socket(I use ZIF, but a regular SIP or DIP socket will work as well) with the bottom pin one above the GND line.
+Connect a wire from pin 24 of the chip socket to 5V line.
+Connect a wire from pin 12 of the chip socket to GND line.
+
+Connect a 330 ohm resistor from Arduino pin 24 to the strip just above the 5v line (line 3).
+Connect a 330 ohm resistor from Arduino pin 22 to the strip just above line 3 (Line 2).
+Connect a 330 ohm resistor from Arduino pin 23 to the strip just above line 2 (line 1).
+
+Connect the red and yellow LEDS between vero board strips line 1 and and line 2.
+Remember to ensure their are in different orientation.
+Connect the green LED between line 2 and line 3.
+as long as red and yellow are different polarities the code can always be changed if the wrong one come on :)
+
+I added an extra pin on the bottom of the versoboard for extra stability.
+
+
+
+
